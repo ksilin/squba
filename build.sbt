@@ -11,9 +11,11 @@ lazy val squba =
       libraryDependencies ++= Seq(
         library.unicomplex,
         library.actormonitor,
+        library.actorregistry,
         library.httpclient,
         library.admin,
         library.akkaHttpJson,
+        library.circeGeneric,
         library.scalaCheck % Test,
         library.scalaTest  % Test
       )
@@ -34,9 +36,11 @@ lazy val library =
     }
     val unicomplex = "org.squbs"         %% "squbs-unicomplex"     % Version.squbs
     val actormonitor = "org.squbs"         %% "squbs-actormonitor"   % Version.squbs
+    val actorregistry= "org.squbs"         %% "squbs-actorregistry"   % Version.squbs
     val httpclient = "org.squbs"         %% "squbs-httpclient"     % Version.squbs
     val admin = "org.squbs"         %% "squbs-admin"          % Version.squbs
     val akkaHttpJson = "de.heikoseeberger" %% "akka-http-circe" % "1.18.0"
+    val circeGeneric = "io.circe" %% "circe-generic" % "0.8.0"
 
     val scalaCheck = "org.scalacheck" %% "scalacheck" % Version.scalaCheck
     val scalaTest  = "org.scalatest"  %% "scalatest"  % Version.scalaTest
