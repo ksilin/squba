@@ -17,17 +17,31 @@
 package com.example.squba
 
 import akka.actor.{ Actor, ActorLogging }
+import akka.pattern.ask
+import org.squbs.unicomplex.{ ReportStatus, StatusReport, Unicomplex }
+
+import scala.concurrent.Await
+import scala.concurrent.duration._
 
 case class PrintMessage(txt: String)
+case object Explain
 
 class HelloActor extends Actor with ActorLogging {
   override def receive: Receive = {
     case PrintMessage(txt) => printMsg(txt)
+    case Explain           => explain()
   }
 
   private def printMsg(txt: String): Unit = {
     println(s"sdfsdf: $txt")
     log.info(txt)
     sender ! "done"
+  }
+
+  private def explain() = {
+//    val x: Unicomplex.type = Unicomplex.lookup()
+    val getStatus            = Unicomplex() ? ReportStatus
+    val status: StatusReport = Await.result(getStatus, 10.seconds).asInstanceOf[StatusReport]
+    println(status)
   }
 }
